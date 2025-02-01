@@ -1,0 +1,7 @@
+# File Path: /.gitignore
+
+__pycache__/
+*.pyc
+.vscode/
+.env
+docker-compose.override.yml

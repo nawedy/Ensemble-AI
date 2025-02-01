@@ -1,25 +1,54 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  vscode:
-    build:
-      context: .
-      dockerfile: Dockerfile.vscode
-    volumes:
-      - .:/workspace
-    ports:
-      - "8080:8080"
-    container_name: vscode_dev
-    command: ["sleep", "infinity"]
-
   api_gateway:
-    build:
-      context: .
-      dockerfile: Dockerfile.gateway
+    build: ../api_gateway
     ports:
       - "8000:8000"
     depends_on:
-      - vscode
+      - math_service
+      - coding_service
+      - reasoning_service
     environment:
-      - ENV=production
-    container_name: api_gateway
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  math_service:
+    build: ../services/math
+    ports:
+      - "5000:5000"
+    environment:
+      - WOLFRAM_ALPHA_APP_ID=${WOLFRAM_ALPHA_APP_ID}
+
+  coding_service:
+    build: ../services/coding
+    ports:
+      - "5001:5001"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+
+  reasoning_service:
+    build: ../services/reasoning
+    ports:
+      - "5002:5002"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+
+  huggingface_service:
+    build: ../services/huggingface
+    ports:
+      - "5003:5003"
+    environment:
+      - HUGGINGFACE_MODEL_NAME=${HUGGINGFACE_MODEL_NAME}
+
+  ollama_service:
+    build: ../services/ollama
+    ports:
+      - "5004:5004"
+    environment:
+      - OLLAMA_API_KEY=${OLLAMA_API_KEY}
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"

@@ -1,29 +1,28 @@
 {
-	"folders": [
-		{
-			"path": "../Downloads/TikTokToe"
-		},
-		{
-			"path": "."
-		},
-		{
-			"path": "vscode-extension"
-		},
-		{
-			"path": "api-gateway"
-		},
-		{
-			"path": "services"
-		}
-	],
-	"settings": {
-		"files.exclude": {
-			"**/.DS_Store": false,
-			"**/.git": false,
-			"**/.hg": false,
-			"**/.svn": false,
-			"**/CVS": false,
-			"**/Thumbs.db": false
-		}
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.DS_Store": true,
+      "**/.git": true,
+      "**/.hg": true,
+      "**/.svn": true,
+      "**/CVS": true,
+      "**/Thumbs.db": true,
+      "**/__pycache__": true,
+      "**/*.pyc": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "python.analysis.autoImportCompletions": true,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "workbench.colorTheme": "Visual Studio Dark",
+    "explorer.confirmDragAndDrop": false
+  }
 }

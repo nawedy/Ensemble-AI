@@ -1,12 +1,14 @@
+# File Path: /docker/docker-compose.yml
+
 version: "3.8"
 
 services:
-  vscode:
+  vscode_dev:
     build:
-      context: .
-      dockerfile: Dockerfile.vscode
+      context: ..
+      dockerfile: docker/Dockerfile.vscode
     volumes:
-      - .:/workspace
+      - ../workspace:/workspace
     ports:
       - "8080:8080"
     container_name: vscode_dev
@@ -14,12 +16,14 @@ services:
 
   api_gateway:
     build:
-      context: .
-      dockerfile: Dockerfile.gateway
+      context: ..
+      dockerfile: docker/Dockerfile.gateway
     ports:
       - "8000:8000"
     depends_on:
-      - vscode
+      - vscode_dev
     environment:
       - ENV=production
+    volumes:
+      - ../api_gateway:/app
     container_name: api_gateway

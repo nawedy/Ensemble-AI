@@ -1,0 +1,6 @@
+# File Path: /api_gateway/requirements.txt
+
+fastapi
+uvicorn
+pydantic
+requests

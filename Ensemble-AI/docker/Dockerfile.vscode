@@ -1,10 +1,12 @@
- # Use the VS Code Dev Container base image
+# File Path: /docker/Dockerfile.vscode
+
+# Base Image: VS Code Development Container
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install dependencies
+# Install necessary dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -18,15 +20,15 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     npm install -g yarn
 
-# Set work directory
+# Set workspace
 WORKDIR /workspace
 
-# Install VSCode extensions
+# Install VSCode Extensions
 RUN su vscode -c "code --install-extension ms-python.python --force"
 RUN su vscode -c "code --install-extension esbenp.prettier-vscode --force"
 
-# Expose necessary ports
+# Expose required ports
 EXPOSE 8080
 
-# Default command
+# Keep the container running
 CMD ["sleep", "infinity"]
