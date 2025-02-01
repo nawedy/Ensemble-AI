@@ -3,7 +3,7 @@
 # **Product Requirement Document (PRD)**
 
 **Product:** AI Coding Assistant for VSCode  
- **Author:** \[Your Name\]  
+ **Author:** Yosuf Nawed - Data Whisperer
  **Date:** January 31, 2025
 
 ---

@@ -1,0 +1,42 @@
+// Example: Creating a basic VSCode webview panel//
+import * as vscode from 'vscode';
+
+export function activate(context: vscode.ExtensionContext) {
+  context.subscriptions.push(
+    vscode.commands.registerCommand('aiAssistant.startChat', () => {
+      const panel = vscode.window.createWebviewPanel(
+        'aiChat', 
+        'AI Coding Assistant', 
+        vscode.ViewColumn.One, 
+        { enableScripts: true }
+      );
+      panel.webview.html = getWebviewContent();
+    })
+  );
+}
+
+function getWebviewContent() {
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>AI Chat</title>
+    </head>
+    <body>
+      <h1>Welcome to AI Coding Assistant</h1>
+      <div id="chatWindow"></div>
+      <input type="text" id="chatInput" placeholder="Type your query here" />
+      <button onclick="sendMessage()">Send</button>
+      <script>
+        function sendMessage() {
+          const input = document.getElementById('chatInput');
+          const message = input.value;
+          // Call backend API here
+          input.value = '';
+        }
+      </script>
+    </body>
+    </html>
+  `;
+}
