@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "."
+		},
+		{
+			"path": "vscode-extension"
+		},
+		{
+			"path": "api-gateway"
 		}
 	],
 	"settings": {}
