@@ -1,0 +1,32 @@
+ # Use the VS Code Dev Container base image
+FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    wget \
+    unzip \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Node.js & Yarn (for frontend development)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g yarn
+
+# Set work directory
+WORKDIR /workspace
+
+# Install VSCode extensions
+RUN su vscode -c "code --install-extension ms-python.python --force"
+RUN su vscode -c "code --install-extension esbenp.prettier-vscode --force"
+
+# Expose necessary ports
+EXPOSE 8080
+
+# Default command
+CMD ["sleep", "infinity"]

@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  vscode:
+    build:
+      context: .
+      dockerfile: Dockerfile.vscode
+    volumes:
+      - .:/workspace
+    ports:
+      - "8080:8080"
+    container_name: vscode_dev
+    command: ["sleep", "infinity"]
+
+  api_gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - vscode
+    environment:
+      - ENV=production
+    container_name: api_gateway
